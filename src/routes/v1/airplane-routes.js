@@ -3,11 +3,20 @@ const { AirplaneController } = require('../../controllers');
 const { AirplaneMiddlewares } = require('../../middlewares');
 
 const router = express.Router();
-console.log('airplane routes called');
 router.post('/',
     AirplaneMiddlewares.validateCreateRequest,
     AirplaneController.createAirplaneController
 );
+
+router.get('/get_all', AirplaneController.getAllAirplaneController);
+router.get('/get/:id', AirplaneController.getByIdController);
+
+router.put('/update/:id',
+    // AirplaneMiddlewares.validateUpdateRequest,
+    AirplaneController.updateAirplaneController
+);
+
+router.delete('/delete/:id', AirplaneController.deleteByIdController);
 
 
 module.exports = router;
