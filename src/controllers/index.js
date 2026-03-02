@@ -1,5 +1,7 @@
 const InfoController = require('./info-controller');
 
+
 module.exports = {
-    InfoController 
+    InfoController,
+    AirplaneController : require('./airplane-controller')
 }
