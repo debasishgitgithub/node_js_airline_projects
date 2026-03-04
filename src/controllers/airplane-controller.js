@@ -5,22 +5,21 @@ const { success } = require('../utils/common/error-response');
 const logger = require('../config/logger-config');
 
 
-const createAirplaneController = async (req, res) => {
+const createAirplaneController = async (req, res, next) => {
     try {
         const airplane = await createAirplane({
-            modelNumber: req.body.modelNumber,
-            capacity: req.body.capacity
+            modelNumber: req.body?.modelNumber,
+            capacity: req.body?.capacity
         });
         SuccessResponse.data = airplane;
         SuccessResponse.message = "Successfully create an airplane";
         return res.status(StatusCodes.CREATED).json(SuccessResponse);
     } catch (error) {
-        ErrorResponse.message = "Something went wrong while creating an airplane";
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+        next(error);   // pass to global error handler
     }
 }
 
-const updateAirplaneController = async (req, res) => {
+const updateAirplaneController = async (req, res, next) => {
     try {
         const airplane = await updateAirplane({
             modelNumber: req.body.modelNumber,
@@ -39,25 +38,22 @@ const updateAirplaneController = async (req, res) => {
         SuccessResponse.message = "Successfully update an airplane";
         return res.status(StatusCodes.CREATED).json(SuccessResponse);
     } catch (error) {
-        console.log(error);
-        ErrorResponse.message = "Something went wrong while updating an airplane";
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+        next(error);   // pass to global error handler
     }
 }
 
-const getAllAirplaneController = async (req, res) => {
+const getAllAirplaneController = async (req, res, next) => {
     try {
         const airplane = await getAllAirplane();
         SuccessResponse.data = airplane;
         SuccessResponse.message = "Successfully fetch an airplane";
-        return res.status(StatusCodes.CREATED).json(SuccessResponse);
+        return res.status(StatusCodes.OK).json(SuccessResponse);
     } catch (error) {
-        ErrorResponse.message = "Something went wrong while getting an airplane";
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+        next(error);   // pass to global error handler
     }
 }
 
-const getByIdController = async (req, res) => {
+const getByIdController = async (req, res, next) => {
     try {
         const id = req.params.id;
         const airplane = await getAirplane(id);
@@ -74,12 +70,11 @@ const getByIdController = async (req, res) => {
         SuccessResponse.message = "Successfully fetch an airplane";
         return res.status(StatusCodes.CREATED).json(SuccessResponse);
     } catch (error) {
-        ErrorResponse.message = "Something went wrong while getting an airplane";
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+        next(error);   // pass to global error handler
     }
 }
 
-const deleteByIdController = async (req, res) => {
+const deleteByIdController = async (req, res, next) => {
     try {
         const id = req.params.id;
         const airplane = await deleteAirplane(id);
@@ -96,8 +91,7 @@ const deleteByIdController = async (req, res) => {
         SuccessResponse.message = "Successfully fetch an airplane";
         return res.status(StatusCodes.CREATED).json(SuccessResponse);
     } catch (error) {
-        ErrorResponse.message = "Something went wrong while deleting an airplane";
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+        next(error);   // pass to global error handler
     }
 }
 
