@@ -50,3 +50,7 @@ https://chatgpt.com/c/69b8284d-da7c-83aa-97ac-08ae707fe644
 Pessimistic Lock / Exclusive Lock
 
 https://gemini.google.com/app/85911f0e96822247
+
+For time related issue
+
+https://chatgpt.com/c/69ba4dd8-7910-8324-a475-9bc89ff3d93d

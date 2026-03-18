@@ -3,7 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 const { CityService } = require('../services');
 const { SuccessResponse, ErrorResponse } = require('../utils/common');
 const { Airport } = require('../models');
-
+const cityService = new CityService();
 
 /**
  * POST : /cities 
@@ -11,7 +11,7 @@ const { Airport } = require('../models');
  */
 async function create(req, res, next) {
     try {
-        const city = await CityService.create({
+        const city = await cityService.create({
             name: req.body?.name
         });
         SuccessResponse.data = city;
@@ -25,7 +25,7 @@ async function create(req, res, next) {
 
 const getAll = async (req, res, next) => {
     try {
-        const data = await CityService.getAll();
+        const data = await cityService.getAll();
         SuccessResponse.data = data;
         SuccessResponse.message = "Successfully fetch an airplane";
         return res.status(StatusCodes.OK).json(SuccessResponse);
@@ -43,8 +43,8 @@ const get = async (req, res, next) => {
             },
             include: Airport
         }
-        // const data = await CityService.get(id);
-        const data = await CityService.findOne(options);
+        // const data = await cityService.get(id);
+        const data = await cityService.findOne(options);
         const airports = await data.getAirports();
         // console.log('test-------------')
         console.log(airports);
