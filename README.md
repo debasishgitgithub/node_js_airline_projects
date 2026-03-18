@@ -1,3 +1,8 @@
+ - To run the server execute
+ ```
+ npm run dev
+ ```
+
 You  can use npx nodemon src/index.js to start the node server.
 Also you can use npm run dev to start the node server.
 If you have higher version of node then you can use node --watch to start the server.
@@ -6,11 +11,42 @@ auther git repo
 https://github.com/singhsanket143/Base-Node-Project-Template.git
 
 
-To initiliaze sequelize run this command
+To initiliaze sequelize run this command inside `src` folder
         npx sequelize init
 
-To see sequelize command search "sequelise cli" in google
-To create database specified by config file use this command "npx sequelize db:create"
-To create modal use this commands "npx sequelize model:generate --name Airplane --attributes modelNumber:string, capacity:integer"
-To migrate migration use this command "npx sequelize db:migrate"
-To undo use this "npx sequelize db: migrate: undo"
+To see sequelize command search `sequelise cli` in google
+
+To create database specified by config file use this command `npx sequelize db:create`
+
+To create modal use this commands `npx sequelize model:generate --name Airplane --attributes modelNumber:string, capacity:integer`
+
+To migrate migration use this command `npx sequelize db:migrate`
+
+To undo use this `npx sequelize db:migrate:undo`
+
+To create seed file use this command `npx sequelize seed:generate --name add-airplanes`
+After entry all the data in seed file you can use this command to insert in db `npx sequelize db:seed:all`
+
+To seed particular seed file use this command `sequelize db:seed seed my_seeder_file.js`
+
+IMPORTANT CONCEPT-----------------------------------------------
+
+----------------------------------------------------------------------
+id Error	                                When it happens
+----------------------------------------------------------------------
+1  SequelizeValidationError	                Model validation fails
+2  SequelizeUniqueConstraintError	        Unique column duplicate
+3  SequelizeForeignKeyConstraintError	        Foreign key invalid
+4  SequelizeDatabaseError	                Database rejects query
+
+How to implements validation logic
+
+https://gemini.google.com/app/7559941cea834a41
+
+how to set association with table
+
+https://chatgpt.com/c/69b8284d-da7c-83aa-97ac-08ae707fe644
+
+Pessimistic Lock / Exclusive Lock
+
+https://gemini.google.com/app/85911f0e96822247
