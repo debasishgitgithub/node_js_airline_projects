@@ -1,43 +1,42 @@
 const { AirplaneRepository } = require('../repositories');
-const { StatusCodes } = require('http-status-codes');
 const AppError = require('../utils/errors/app-error');
-const airplaneRepository = new AirplaneRepository();
 
-async function createAirplane(data) {
-    const airplane = await airplaneRepository.create(data);
-    if (!airplane) {
-        throw new AppError('Airplane not created');
+
+class AirplaneService {
+    constructor() {
+        this.airplaneRepository = new AirplaneRepository();
     }
 
-    return airplane;
+    async create(data) {
+        const airplane = await this.airplaneRepository.create(data);
+        if (!airplane) {
+            throw new AppError('Airplane not created');
+        }
+
+        return airplane;
+    }
+
+    async update(data) {
+
+        return await this.airplaneRepository.update(data);
+    }
+
+
+    async getAll() {
+        const data = await this.airplaneRepository.getAll();
+        return data;
+    }
+
+    async get(id) {
+        const data = await this.airplaneRepository.get(id);
+        return data;
+    }
+
+    async delete(id) {
+        const data = await this.airplaneRepository.delete({ id });
+        return data;
+
+    }
 }
 
-async function updateAirplane(data) {
-    const airplane = await airplaneRepository.update(data);
-    return airplane;
-}
-
-
-async function getAllAirplane() {
-    const data = await airplaneRepository.getAll();
-    return data;
-}
-
-async function getAirplane(id) {
-    const data = await airplaneRepository.get(id);
-    return data;
-}
-
-async function deleteAirplane(id) {
-    const data = await airplaneRepository.delete({ id });
-    return data;
-
-}
-
-module.exports = {
-    createAirplane,
-    getAllAirplane,
-    getAirplane,
-    deleteAirplane,
-    updateAirplane
-}
+module.exports = AirplaneService;

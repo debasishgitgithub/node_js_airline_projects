@@ -2,6 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const { FlightService } = require('../services');
 const { SuccessResponse, ErrorResponse } = require('../utils/common');
+const flightService = new FlightService();
 
 /**
  * POST : /flights 
@@ -19,7 +20,7 @@ const { SuccessResponse, ErrorResponse } = require('../utils/common');
  */
 async function createFlight(req, res, next) {
     try {
-        const flight = await FlightService.createFlight({
+        const flight = await flightService.createFlight({
             flightNumber: req.body.flightNumber,
             airplaneId: req.body.airplaneId,
             departureAirportId: req.body.departureAirportId,
@@ -40,7 +41,7 @@ async function createFlight(req, res, next) {
 
 async function getAllFlights(req, res, next) {
     try {
-        const flights = await FlightService.getAllFlights(req.query);
+        const flights = await flightService.getAllFlights(req.query);
         SuccessResponse.data = flights;
         return res
                 .status(StatusCodes.CREATED)
@@ -56,7 +57,7 @@ async function getAllFlights(req, res, next) {
  */
 async function getFlight(req, res, next) {
     try {
-        const flight = await FlightService.getFlight(req.params.id);
+        const flight = await flightService.getFlight(req.params.id);
         SuccessResponse.data = flight;
         return res
                 .status(StatusCodes.OK)
@@ -69,7 +70,7 @@ async function getFlight(req, res, next) {
 async function updateSeats(req, res, next) {
     try {
         console.log(req.body);
-        const response = await FlightService.updateSeats({
+        const response = await flightService.updateSeats({
             flightId: req.params.id,
             seats: req.body.seats, 
             dec: req.body.dec

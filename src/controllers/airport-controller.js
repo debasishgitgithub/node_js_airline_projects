@@ -2,6 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const { AirportService } = require('../services');
 const { SuccessResponse, ErrorResponse } = require('../utils/common');
+const airportService = new AirportService();
 
 /**
  * POST : /airports 
@@ -9,7 +10,7 @@ const { SuccessResponse, ErrorResponse } = require('../utils/common');
  */
 async function createAirport(req, res, next) {
     try {
-        const airport = await AirportService.createAirport({
+        const airport = await airportService.createAirport({
             name: req.body.name,
             code: req.body.code,
             address: req.body.address,
@@ -31,7 +32,7 @@ async function createAirport(req, res, next) {
  */
 async function getAirports(req, res, next) {
     try {
-        const airports = await AirportService.getAirports();
+        const airports = await airportService.getAll();
         SuccessResponse.data = airports;
         return res
             .status(StatusCodes.OK)
@@ -47,7 +48,7 @@ async function getAirports(req, res, next) {
  */
 async function getAirport(req, res, next) {
     try {
-        const airports = await AirportService.getAirport(req.params?.id);
+        const airports = await airportService.get(req.params?.id);
         SuccessResponse.data = airports;
         return res
             .status(StatusCodes.OK)
@@ -63,7 +64,7 @@ async function getAirport(req, res, next) {
  */
 async function destroyAirport(req, res, next) {
     try {
-        const response = await AirportService.destroyAirport(req.params.id);
+        const response = await airportService.destroy(req.params.id);
         SuccessResponse.data = response;
         return res
             .status(StatusCodes.OK)

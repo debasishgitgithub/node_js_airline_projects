@@ -1,4 +1,6 @@
 const express = require('express');
+const { createFormValidator } = require('../../validators/flights_validator');
+const { ValidateMiddlewares } = require('../../middlewares');
 
 const { FlightController } = require('../../controllers');
 // const { FlightMiddlewares } = require('../../middlewares');
@@ -6,21 +8,25 @@ const { FlightController } = require('../../controllers');
 const router = express.Router();
 
 // /api/v1/flights POST
-router.post('/', 
+router.post('/',
         // FlightMiddlewares.validateCreateRequest,
+        createFormValidator,
+        ValidateMiddlewares.apiValidation,
         FlightController.createFlight);
 
 // /api/v1/flights?trips=MUM-DEL GET
-router.get('/get_all', 
+router.get('/get_all',
         FlightController.getAllFlights);
 
 // /api/v1/flights/:id GET
-router.get('/get/:id', 
+router.get('/get/:id',
         FlightController.getFlight);
 // /api/v1/flights/:id/seats PATCH
 router.patch(
-        '/:id/seats', 
+        '/:id/seats',
         // FlightMiddlewares.validateUpdateSeatsRequest,
         FlightController.updateSeats
 );
+
+
 module.exports = router;
