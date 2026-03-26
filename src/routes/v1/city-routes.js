@@ -1,18 +1,24 @@
 const express = require('express');
+const { AuthMiddlewares, RoleMiddlewares } = require('../../middlewares');
 
 const { CityController } = require('../../controllers');
-const { CityMiddlewares } = require('../../middlewares');
 
 const router = express.Router();
 
 // /api/v1/cities POST
-router.post('/', 
-        // CityMiddlewares.validateCreateRequest,
+router.post('/',
         CityController.create);
 
 // /api/v1/cities GET
-router.get('/get_all', CityController.getAll);
-router.get('/get/:id', CityController.get);
+router.get('/get_all',
+        AuthMiddlewares.isAuthenticated,
+        RoleMiddlewares.authorizeRoles('ADMIN'),
+        CityController.getAll);
+
+router.get('/get/:id', 
+        AuthMiddlewares.isAuthenticated,
+        RoleMiddlewares.authorizeRoles('ADMIN'),
+        CityController.get);
 
 
 module.exports = router;

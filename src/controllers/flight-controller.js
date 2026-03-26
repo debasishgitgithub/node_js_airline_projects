@@ -4,20 +4,7 @@ const { FlightService } = require('../services');
 const { SuccessResponse, ErrorResponse } = require('../utils/common');
 const flightService = new FlightService();
 
-/**
- * POST : /flights 
- * req-body {
- *  flightNumber: 'UK 808',
- *  airplaneId: 'a380',
- *  departureAirportId: 12,
- *  arrivalAirportId: 11,
- *  arrivalTime: '11:10:00',
- *  departureTime: '9:10:00',
- *  price: 2000
- *  boardingGate: '12A',
- *  totalSeats: 120
- * }
- */
+
 async function createFlight(req, res, next) {
     try {
         const flight = await flightService.createFlight({

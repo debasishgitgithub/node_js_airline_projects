@@ -64,3 +64,8 @@ id Error	                                When it happens
 `File uplaod using multer in api`
 
 <https://chatgpt.com/c/69bed342-0798-8322-9e44-b58ba6d77391>
+
+`Callback function like Passport Local strategy`
+`Concept of Closure and Scope`
+
+<https://chatgpt.com/c/69c20196-9830-83a7-857b-6f5a1ac30a15>

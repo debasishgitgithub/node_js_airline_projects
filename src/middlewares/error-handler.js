@@ -7,7 +7,6 @@ const AppError = require('../utils/errors/app-error');
 
 function errorHandler(err, req, res, next) {
     let statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
-    console.log(err);
 
     // Multer errors
     if (err instanceof multer.MulterError) {
@@ -38,15 +37,11 @@ function errorHandler(err, req, res, next) {
     else {
         ErrorResponse.message = 'Something went wrong';
         ErrorResponse.error = err.message; // cleaner output
+        console.log(err);
     }
-
 
     // API request (Postman / Axios / Fetch)
     if (req.originalUrl.startsWith('/api/')) {
-        // if (err.name === 'SequelizeValidationError') {
-        //     ErrorResponse.message = err.errors.map(e => e.message);
-        //     statusCode = StatusCodes.BAD_REQUEST;
-        // }
         return res.status(statusCode).json(ErrorResponse);
     }
 
