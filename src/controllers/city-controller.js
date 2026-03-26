@@ -58,8 +58,18 @@ const get = async (req, res, next) => {
 
 
 
+
+//  < ------- this is for WEB routes  ------- > //
+
+
+async function create_form(req, res, next) {
+    return res.render('city/create');
+}
+
+
 module.exports = {
     create,
     getAll,
-    get
+    get,
+    create_form
 }

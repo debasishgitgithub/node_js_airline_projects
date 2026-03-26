@@ -9,6 +9,9 @@ class CityService {
     }
 
     async create(data) {
+        if(!data.name) {
+            throw new AppError('Name is required', StatusCodes.BAD_REQUEST);
+        }
         const city = await this.cityRepository.create(data);
         if (!city) {
             throw new AppError('City not created', StatusCodes.BAD_REQUEST);

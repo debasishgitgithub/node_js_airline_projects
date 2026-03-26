@@ -6,11 +6,9 @@ const fs = require('fs'); // Added File System module
 const uploadPath = 'uploads';
 
 const createUploader = ({ allowedTypes, maxSize, folderPath = '' }) => {
-
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
             const fullPath = path.join(uploadPath, folderPath);
-            console.log('----------',fullPath);
             // Create directory if it doesn't exist
             // { recursive: true } ensures nested folders are created
             if (!fs.existsSync(fullPath)) {

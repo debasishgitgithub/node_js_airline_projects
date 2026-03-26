@@ -11,16 +11,17 @@ const airplaneService = new AirplaneService();
 
 const createAirplaneController = async (req, res, next) => {
     try {
+        console.log(req.body)
         // validate file
         if (!req.file) {
-            ErrorResponse.message = 'Something went wrong while creating airplane';
+            ErrorResponse.message = 'Something went wrong while uploading image airplane';
             return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
         }
 
         const airplane = await airplaneService.create({
             modelNumber: req.body?.modelNumber,
             capacity: req.body?.capacity,
-            file_url: req.file.path
+            file_url: req.file.path.split(path.sep).join('/')
         });
         SuccessResponse.data = airplane;
         SuccessResponse.message = "Successfully create an airplane";
@@ -45,18 +46,20 @@ const updateAirplaneController = async (req, res, next) => {
         if (!airplane) {
             throw new AppError('Airplane not found');
         }
+        console.log(airplane);
 
         // if new file uploaded
         if (req.file) {
             // delete old file
             if (airplane.file_url) {
                 const oldPath = path.join(__dirname, '../../', airplane.file_url);
+                console.log(oldPath)
                 if (fs.existsSync(oldPath)) {
                     fs.unlinkSync(oldPath);
                 }
             }
 
-            insertAbleData.file_url = req.file.path
+            insertAbleData.file_url = req.file.path.split(path.sep).join('/')
         }
 
         const airplaneUpdate = await airplaneService.update(insertAbleData);
@@ -145,10 +148,19 @@ const deleteByIdController = async (req, res, next) => {
     }
 }
 
+//  < ------- this is for WEB routes  ------- > //
+
+
+async function create_form(req, res, next) {
+    return res.render('airplane/create');
+}
+
+
 module.exports = {
     createAirplaneController,
     getAllAirplaneController,
     getByIdController,
     deleteByIdController,
-    updateAirplaneController
+    updateAirplaneController,
+    create_form
 }
