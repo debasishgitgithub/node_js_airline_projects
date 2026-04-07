@@ -1,5 +1,5 @@
 const { ServerConfig, Logger } = require('./config');
-const { errorHandlerMiddlewares } = require('./middlewares');
+const { errorHandlerMiddlewares, requestLogger } = require('./middlewares');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const CONSTANTS = require('./config/constant');
@@ -25,6 +25,7 @@ app.use(session({
     maxAge: CONSTANTS.COOKIE_EXPIRES_TIME // 1 hour
   }
 }));
+app.use(requestLogger); // Global request logger middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', allRoutes);

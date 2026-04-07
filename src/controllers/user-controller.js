@@ -2,6 +2,7 @@
 const { UserService } = require('../services');
 const { StatusCodes } = require('http-status-codes');
 const { SuccessResponse } = require('../utils/common');
+const {Logger} = require('../config');
 
 const userService = new UserService();
 
@@ -11,6 +12,7 @@ async function create(req, res, next) {
         SuccessResponse.data = user;
         SuccessResponse.message = "Successfully create an user";
 
+        Logger.info("User created", { user });
         return res
             .status(StatusCodes.CREATED)
             .json(SuccessResponse);
@@ -31,6 +33,7 @@ async function login(req, res, next) {
         SuccessResponse.data = { user, token };
         SuccessResponse.message = "Successfully login";
 
+        Logger.info("User logged in", { user });
         // ✅ For API → send token
         return res
             .status(StatusCodes.OK)

@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-
+const {Logger} = require('../config');
 const { CityService } = require('../services');
 const { SuccessResponse, ErrorResponse } = require('../utils/common');
 const { Airport } = require('../models');
@@ -15,6 +15,8 @@ async function create(req, res, next) {
             name: req.body?.name
         });
         SuccessResponse.data = city;
+
+        Logger.info("City created", { city });
         return res
             .status(StatusCodes.CREATED)
             .json(SuccessResponse);
@@ -28,6 +30,8 @@ const getAll = async (req, res, next) => {
         const data = await cityService.getAll();
         SuccessResponse.data = data;
         SuccessResponse.message = "Successfully fetch an airplane";
+
+        Logger.info("Fetched all cities", { count: data.length });
         return res.status(StatusCodes.OK).json(SuccessResponse);
     } catch (error) {
         next(error);   // pass to global error handler
@@ -50,6 +54,8 @@ const get = async (req, res, next) => {
         console.log(airports);
         SuccessResponse.data = data;
         SuccessResponse.message = "Successfully fetch an airplane";
+
+        Logger.info("Fetched city", { id });
         return res.status(StatusCodes.OK).json(SuccessResponse);
     } catch (error) {
         next(error);   // pass to global error handler

@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const logger = require('../config/logger-config');
+const { Logger } = require('../config');
 const multer = require('multer');
 const ErrorResponse = require('../utils/common/error-response');
 const AppError = require('../utils/errors/app-error');
@@ -7,6 +7,11 @@ const AppError = require('../utils/errors/app-error');
 
 function errorHandler(err, req, res, next) {
     let statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
+    Logger.error("Error occurred", {
+        message: err.message,
+        // stack: err.stack,
+        statusCode: statusCode
+    });
 
     // Multer errors
     if (err instanceof multer.MulterError) {

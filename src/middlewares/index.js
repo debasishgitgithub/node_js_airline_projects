@@ -3,5 +3,6 @@ module.exports = {
     errorHandlerMiddlewares: require('./error-handler'),
     ValidateMiddlewares: require('./validate-middlewares'),
     AuthMiddlewares: require('./auth-middlewares'),
-    RoleMiddlewares: require('./role-middlewares')
+    RoleMiddlewares: require('./role-middlewares'),
+    requestLogger: require('./request-logger')
 }

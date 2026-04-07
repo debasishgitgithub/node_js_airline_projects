@@ -1,20 +1,43 @@
 const { createLogger, format, transports } = require('winston');
-const { combine, timestamp, label, printf } = format;
-
-const myFormat = printf(({ level, message, label, timestamp }) => {
-    return `${timestamp} [${label}] ${level}: ${message}`;
-});
+const { combine, timestamp, errors, json, printf } = format;
 
 const logger = createLogger({
     format: combine(
-        label({ label: 'right meow!' }),
         timestamp(),
-        myFormat
+        // winston.format.timestamp({
+        //   format: () => new Date().toLocaleString()
+        // }),
+        errors({ stack: true }),
+        json() // default format for file
     ),
     transports: [
-        new transports.Console(),
-        new transports.File({filename: 'combined.log'})
+        // Error logs (only errors)
+        new transports.File({
+            filename: 'logs/error.log',
+            level: 'error'
+        }),
+        // All logs
+        new transports.File({
+            filename: 'logs/combined.log'
+        })
     ]
 });
+
+
+// const myFormat = printf(({ level, message, timestamp, stack, ...meta }) => {
+//     return `${timestamp} [${level}]: ${stack || message} ${Object.keys(meta).length ? JSON.stringify(meta) : ''}`;
+// });
+
+// // Console logging (only in development)
+// if (process.env.NODE_ENV !== 'production') {
+//     logger.add(
+//         new transports.Console({
+//             format: combine(
+//                 timestamp(),
+//                 myFormat
+//             )
+//         })
+//     );
+// }
 
 module.exports = logger;
