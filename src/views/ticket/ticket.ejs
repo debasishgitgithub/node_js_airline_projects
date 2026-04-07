@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial; }
+    .ticket {
+      border: 1px solid #000;
+      padding: 20px;
+      width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ticket">
+    <h2>Flight Ticket</h2>
+    <p><strong>Flight:</strong> <%= flight.flightNumber %></p>
+    <p><strong>From:</strong> <%= flight.departure %></p>
+    <p><strong>To:</strong> <%= flight.arrival %></p>
+    <p><strong>Date:</strong> <%= flight.date %></p>
+  </div>
+</body>
+</html>
