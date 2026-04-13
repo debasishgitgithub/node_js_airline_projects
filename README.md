@@ -1,18 +1,18 @@
- - To run the server execute
- ```
- npm run dev
- ```
+- To run the server execute
 
-You  can use npx nodemon src/index.js to start the node server.
+```
+npm run dev
+```
+
+You can use npx nodemon src/index.js to start the node server.
 Also you can use npm run dev to start the node server.
 If you have higher version of node then you can use node --watch to start the server.
 
 auther git repo
 https://github.com/singhsanket143/Base-Node-Project-Template.git
 
-
 To initiliaze sequelize run this command inside `src` folder
-        npx sequelize init
+npx sequelize init
 
 To see sequelize command search `sequelise cli` in google
 
@@ -31,13 +31,14 @@ To seed particular seed file use this command `sequelize db:seed seed my_seeder_
 
 IMPORTANT CONCEPT-----------------------------------------------
 
-----------------------------------------------------------------------
-id Error	                                When it happens
-----------------------------------------------------------------------
-1  SequelizeValidationError	                Model validation fails
-2  SequelizeUniqueConstraintError	        Unique column duplicate
-3  SequelizeForeignKeyConstraintError	        Foreign key invalid
-4  SequelizeDatabaseError	                Database rejects query
+---
+
+## id Error When it happens
+
+1 SequelizeValidationError Model validation fails
+2 SequelizeUniqueConstraintError Unique column duplicate
+3 SequelizeForeignKeyConstraintError Foreign key invalid
+4 SequelizeDatabaseError Database rejects query
 
 `How to implements validation logic`
 
@@ -69,3 +70,7 @@ id Error	                                When it happens
 `Concept of Closure and Scope`
 
 <https://chatgpt.com/c/69c20196-9830-83a7-857b-6f5a1ac30a15>
+
+`Environment setup`
+
+<https://chatgpt.com/c/69dd1647-b0a0-8323-b201-6f7e4ef06133>
