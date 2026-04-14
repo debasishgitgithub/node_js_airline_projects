@@ -1,5 +1,6 @@
+require('dotenv').config();
 const { StatusCodes } = require('http-status-codes');
-const {Logger} = require('../config');
+const { Logger } = require('../config');
 const { CityService } = require('../services');
 const { SuccessResponse, ErrorResponse } = require('../utils/common');
 const { Airport } = require('../models');
@@ -41,8 +42,8 @@ const getAll = async (req, res, next) => {
 const get = async (req, res, next) => {
     try {
         const id = req.params.id;
-        let options  = {
-            where:{
+        let options = {
+            where: {
                 id
             },
             include: Airport
@@ -69,7 +70,9 @@ const get = async (req, res, next) => {
 
 
 async function create_form(req, res, next) {
-    return res.render('city/create');
+    return res.render('city/create', {
+        BASE_URL: process.env.NODE_ENV === 'development' ? process.env.DEV_BASE_URL : process.env.PROD_BASE_URL,
+    });
 }
 
 

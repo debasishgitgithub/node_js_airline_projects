@@ -7,7 +7,8 @@ $('#flightForm').on('submit', async function (e) {
 
     // try {
     const response = await $.ajax({
-        url: 'http://localhost:3000/api/v1/cities',
+        // url: 'http://localhost:3000/api/v1/cities',
+        url: `${BASE_URL}/api/v1/cities`,
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -39,5 +40,5 @@ $('#flightForm').on('submit', async function (e) {
         }
     });
 
-    
+
 });

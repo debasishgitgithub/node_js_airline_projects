@@ -10,6 +10,9 @@
     <button class="btn btn-primary">Submit</button>
   </form>
 
-<%- include('../layouts/footer') %>
+  <%- include('../layouts/footer') %>
 
-<script src="/js/city.js"></script>
+    <script>
+      window.BASE_URL = "<%= BASE_URL %>";
+    </script>
+    <script src="/js/city.js"></script>
