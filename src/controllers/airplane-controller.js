@@ -5,6 +5,7 @@ const { ErrorResponse, SuccessResponse } = require('../utils/common');
 const logger = require('../config/logger-config');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
 
 const airplaneService = new AirplaneService();
 
@@ -152,7 +153,9 @@ const deleteByIdController = async (req, res, next) => {
 
 
 async function create_form(req, res, next) {
-    return res.render('airplane/create');
+    return res.render('airplane/create', {
+        BASE_URL: process.env.NODE_ENV === 'development' ? process.env.DEV_BASE_URL : process.env.PROD_BASE_URL,
+    });
 }
 
 

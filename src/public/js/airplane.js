@@ -5,7 +5,7 @@ $('#flightForm').on('submit', function (e) {
     let formData = new FormData(this);
     // try {
     $.ajax({
-        url: 'http://localhost:3000/api/v1/airplanes',
+        url: `${BASE_URL}/api/v1/airplanes`,
         method: 'POST',
         // contentType: 'application/json',
         processData: false, // Tell jQuery not to process the data
